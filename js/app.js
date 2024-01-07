@@ -1,37 +1,86 @@
-console.log('Olá, Javascript!')
 
-var userName = 'Willames Vital'
+const LIST = [
+    {
+        id: 1,
+        nome: 'Mestre Yoda',
+        avatar: '/images/yoda.png'
+    },
+    {
+        id: 2,
+        nome: 'Luke Skywalker',
+        avatar: '/images/luke.png'
+    },
+    {
+        id: 3,
+        nome: 'Princesa Leia',
+        avatar: '/images/leia.png'
+    },
+    {
+        id: 4,
+        nome: 'Han Solo',
+        avatar: '/images/hansolo.png'
+    },
+    {
+        id: 5,
+        nome: 'Dart Vader',
+        avatar: '/images/vader.png'
+    },
+    {
+        id: 6,
+        nome: 'Chewbacca',
+        avatar: '/images/chewbacca.png'
+    },
+    {
+        id: 7,
+        nome: 'R2D2',
+        avatar: '/images/r2d2.png'
+    },
+    {
+        id: 8,
+        nome: 'C3pO',
+        avatar: '/images/c3po.png'
+    }
+]
 
-document.getElementById('user-name').innerHTML = userName
+const App = new Vue({
+    el: '#app',
+    data: {
+        title: 'Star Wars Lego',
+        userName: 'Willames',
+        characters: LIST,
+        searchName: ''
+    },
+    methods: {
+        like(userName) {
+            alert(`O personagem ${userName} recebeu um like!`)
+        },
+        remove(id) {
+            const list = this.characters
 
-// Variavéis //
+            const result = list.filter(item => {
+                return item.id !== id
+            })
 
-// Uma variável chamada 'nome' é declarada e recebe o valor 'Mestre Yoda'.
-// A palavra-chave 'var' é usada para declarar uma variável em JavaScript.
-// É importante observar que as variáveis JavaScript declaradas com var têm escopo de função e não de bloco.
+            this.characters = result
+        },
+        search() {
 
-// Javascript tem uma tipagem dinamica
-//var nome = 'Mestre Yoda'
-//var idade = 100 
-//var jedi = true 
+            if (this.searchName === '') {
+                return alert('O campo de busca é obrigatório')
+            }
 
-//console.log(nome)
-//console.log(idade)
-//console.log(jedi)
+            const list = this.characters = LIST
 
+            const result = list.filter(item => {
+                return item.nome === this.searchName
+            })
 
-// Operadores Matemáticos //
+            if (result.length <= 0) {
+                alert('Nenhum registro encontrado.')
+            } else {
+                this.characters = result
+            }
 
-var n1 = 7
-var n2 = 2.5
-
-console.log(typeof n1)
-console.log(typeof n2)
-
-var total   = n1 / n2
-console.log(total)
-
-// dividir (o sinal do "+" indica a adição)
-// dividir (o sinal do "-" indica a subtração)
-// dividir (o sinal do "*" indica a multiplicação)
-// dividir (o sinal do "/" indica a divisão)
+        }
+    }
+})
